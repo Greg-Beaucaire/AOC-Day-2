@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./lib/prism.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Bourre ton fichier txt avec les inputs du site ici :</h2>
+    <input
+      type="file"
+      id="bourreTonFichierTXTici"
+      name="bourreTonFichierTXTici"
+    />
+    <p>Les résultats sont dans la console o/</p>
+    <br />
+    <br />
+    <h2>JS de la part1</h2>
+    <pre>
+      <code class="language-js">
+// PART 1
+
+// On target l'input utilisateur
+let inputSouille = document.getElementById("bourreTonFichierTXTici");
+
+// Ptit event listener des familles pour écouter l'event change sur l'input
+inputSouille.addEventListener("change", function (e) {
+  // On récupère le fichier du démon
+  let pourquoiCestFormateCommeCaBordel = inputSouille.files[0];
+
+  // On initialise le truc béni des dieux pour lire le bouzin
+  let jesus = new FileReader();
+  jesus.onload = function (e) {
+    // on récupère le résultat de l'opération du saint esprit dans une var
+    let deguiDegueu = jesus.result;
+
+    // Le formatage est un chouille différent de l'exo 1 parce qu'il faut d'abord récupérer
+    // les lignes et ensuite les shlass en deux pour avoir la paire de valeurs direction et distance parcourue
+    let moinsDegueulasse = deguiDegueu
+      .trim()
+      .split("\n")
+      .map((line) => {
+        let [direction, distance] = line.split(" ");
+
+        // La distance c'est pour l'instant une string, hors on veut de l'int, donc parseInt dans gueule, gauche droite bim boum
+        distance = parseInt(distance);
+
+        return {
+          direction,
+          distance,
+        };
+      });
+
+    // On a nos paires de valeurs, lesssgo
+    
+    // On commence à 0 en horizontal et 0 en profondeur
+    let ouCestQuonEst = 0;
+    let profondeurXXX = 0;
+    
+    // On parse le tableau pour check chaque paire
+    // On vérifie la direction avec les conditions (if, else if et else)
+    // On incrémente / décremente en fonction les valeurs qu'on a définit au dessus
+    for (let { direction, distance } of moinsDegueulasse) {
+      if (direction === "down") {
+        profondeurXXX += distance;
+      } else if (direction === "up") {
+        profondeurXXX -= distance;
+      } else if (direction === "forward") {
+        ouCestQuonEst += distance;
+      } else {
+        // Si jamais Billy de la compta a entré une direction du genre forwERDMAGERD
+        console.log(`C'est quoi cette merde là tu peux pas faire attention Billy ? ${direction}`);
+      }
+    }
+
+    // Et on finit par un ptit console log des familles
+    // Sans oublier de multiplier les deux valeurs comme demandé dans l'exercice
+    // C'est faux j'ai pas perdu 20 minutes parce que j'ai pas lu...
+    console.log(profondeurXXX * ouCestQuonEst);
+  };
+
+  jesus.readAsText(pourquoiCestFormateCommeCaBordel);
+});        
+      </code>
+    </pre>
+    <br />
+    <h2>JS de la part2</h2>
+    <pre>
+      <code class="language-js">
+// PART 2
+
+// On target l'input utilisateur
+let inputSouille2 = document.getElementById("bourreTonFichierTXTici");
+
+// Ptit event listener des familles pour écouter l'event change sur l'input
+inputSouille2.addEventListener("change", function (e) {
+  // On récupère le fichier du démon
+  let pourquoiCestFormateCommeCaBordel2 = inputSouille2.files[0];
+
+  // On initialise le truc béni des dieux pour lire le bouzin
+  let jesus2 = new FileReader();
+  jesus2.onload = function (e) {
+    // on récupère le résultat de l'opération du saint esprit dans une var
+    let deguiDegueu2 = jesus2.result;
+
+    // Le formatage est un chouille différent de l'exo 1 parce qu'il faut d'abord récupérer
+    // les lignes et ensuite les shlass en deux pour avoir la paire de valeurs direction et distance parcourue
+    let moinsDegueulasse2 = deguiDegueu2
+      .trim()
+      .split("\n")
+      .map((line) => {
+        let [direction2, distance2] = line.split(" ");
+
+        // La distance c'est pour l'instant une string, hors on veut de l'int, donc parseInt dans gueule, gauche droite bim boum
+        distance2 = parseInt(distance2);
+
+        return {
+          direction2,
+          distance2,
+        };
+      });
+
+    // On a nos paires de valeurs, lesssgo
+    
+    // On commence à 0 en horizontal et 0 en profondeur
+    let ouCestQuonEst2 = 0;
+    let profondeurXXX2 = 0;
+    let counterStrikeGO = 0;
+    
+    // On parse le tableau pour check chaque paire
+    // On vérifie la direction avec les conditions (if, else if et else)
+    // On incrémente / décremente en fonction les valeurs qu'on a définit au dessus
+    // La petite complexité par rapport à la part 1 c'est de transformer ce qu'on nous dit en math
+    // Et globalement, on peut résumer à 'pour aller plus profond, faut avancer'
+    // C'est pas moi qu'ai fait l'exercice et chacun y verra une métaphore différente..........
+    for (let { direction2, distance2 } of moinsDegueulasse2) {
+      if (direction2 === "down") {
+        counterStrikeGO += distance2;
+      } else if (direction2 === "up") {
+        counterStrikeGO -= distance2;
+      } else if (direction2 === "forward") {
+        // Voila c'est ici que ça change
+        // Imaginons on vise vers le bas avec notre panzer-aqua-420
+        // Si on se met à avancer, forcément on va aller plus profond
+        // Du coup quand l'ordre est forward, il faut aussi incrémenter la profondeur
+        // Et la nouvelle profondeur se calcule en faisant (profondeur actuelle) + ((angle de visé) x (distance))
+        ouCestQuonEst2 += distance2;
+        profondeurXXX2 += counterStrikeGO * distance2;
+      } else {
+        // Si jamais Billy de la compta a entré une direction du genre forwERDMAGERD
+        console.log(`C'est quoi cette merde là tu peux pas faire attention Billy ? ${direction2}`);
+      }
+    }
+
+    // Et on finit par un ptit console log des familles
+    // Sans oublier de multiplier les deux valeurs comme demandé dans l'exercice
+    // Cette fois ci j'ai pas oublié bordel de zut
+    console.log(profondeurXXX2 * ouCestQuonEst2);
+  };
+
+  jesus2.readAsText(pourquoiCestFormateCommeCaBordel2);
+});         
+      </code>  
+    </pre>
+    <script src="part1.js"></script>
+    <script src="part2.js"></script>
+    <script src="./lib/prism.js"></script>
+  </body>
+</html>
